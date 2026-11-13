@@ -574,9 +574,9 @@ if('serviceWorker' in navigator && /^https?:/.test(location.protocol)){
     /* na primeira visita a página ainda não está sob o modo offline: precisa recarregar uma vez */
     if(!navigator.serviceWorker.controller) statusOffline('Recarregue a página uma vez para ativar o uso sem internet neste aparelho.', 'aviso');
     else statusOffline('Pronto para usar sem internet neste aparelho.', 'ok');
-  }).catch(function(e){ statusOffline('Uso sem internet indisponível neste navegador (' + (e && e.message || e) + ').', 'aviso'); });
+  }).catch(function(e){ /* sem o sw.js publicado o portal funciona normalmente, só não abre sem internet */ console.warn('Gestão SMS offline:', e); });
   navigator.serviceWorker.addEventListener('controllerchange', function(){ statusOffline('Pronto para usar sem internet neste aparelho.', 'ok'); });
-} else statusOffline('Uso sem internet indisponível: abra o portal pelo endereço https da Vercel.', 'aviso');
+}
 </script>
 <script>
 /* painel dos Controles SESMT (o mesmo do Portal de Ambientes) */
